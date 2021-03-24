@@ -1,0 +1,26 @@
+[
+  {
+    "date": {
+      "year": 2021,
+      "month": 2,
+      "day": 1
+    },
+    "total_deposit": 10000,
+    "external_deposit": 0,
+    "used_credit": 0,
+    "total_value_securities": 11744,
+    "balance": 78
+  },
+  {
+    "date": {
+      "year": 2021,
+      "month": 1,
+      "day": 7
+    },
+    "total_deposit": 10000,
+    "external_deposit": 0,
+    "used_credit": 0,
+    "total_value_securities": 10597,
+    "balance": 1094
+  }
+]

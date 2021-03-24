@@ -1,0 +1,40 @@
+<section class="progress-table">
+  <table>
+    <thead>
+      <tr>
+        <th>Datum</th> <!-- date -->
+        <th>Insatt totalt</th> <!-- total_deposit, insättningar minus uttag, totalen kan ses under transaktioner -->
+        <th>Nyttjad kredit</th> <!-- used_credit, Saldo på kreditkonto, alltså inte med hänsyn till saldo -->
+        <th>Saldo</th> <!-- balance, Saldo i SEK -->
+        <th>Värde vp</th> <!-- total_value_securities, Värdepappersinnehav -->
+        <th>Värde vp exl. kredit</th>
+        <th>Totalt värde</th>
+        <th>Utveckling i SEK</th>
+        <th>Utveckling %</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- prettier-ignore -->
+      {% for d in include.data %} 
+        {% capture date %}{{ d.date.year }}-{{ d.date.month }}-{{ d.date.day }}{% endcapture %}
+        {% capture deposit %} {{ d.total_deposit | plus: d.external_deposit }}{% endcapture %}
+        {% capture total_value_securities_exl_credit %} {{ d.total_value_securities | minus: d.used_credit }}{% endcapture %}
+        {% capture total_value %} {{ total_value_securities_exl_credit | plus: d.balance }}{% endcapture %}
+        {% capture earned %} {{ total_value | minus: deposit }}{% endcapture %}
+        {% capture total_deposit_float %} {{ deposit | times: 1.0 }}{% endcapture %}
+        {% capture earned_percente %} {{ total_value | divided_by: total_deposit_float }}{% endcapture %}
+      <tr>
+        <td>{{ date | date: "%Y-%m-%d" }}</td>
+        <td>{{ deposit }}</td>
+        <td>{{ d.used_credit }}</td>
+        <td>{{ d.balance }}</td>
+        <td>{{ d.total_value_securities }}</td>
+        <td>{{ total_value_securities_exl_credit }}</td>
+        <td>{{ total_value }}</td>
+        <td>{{ earned }}</td>
+        <td>{{ earned_percente | minus: 1 | times: 100 | round: 2 }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>

@@ -1,0 +1,20 @@
+:root {
+  font-family: "Open Sans", sans-serif;
+  font-size: 18px;
+
+  .progress-table {
+    overflow-x: auto;
+    width: 100%;
+
+    table {
+      border-collapse: collapse;
+
+      th,
+      td {
+        padding: 12px;
+        border: 2px solid #d7d7d7;
+        text-align: left;
+      }
+    }
+  }
+}
